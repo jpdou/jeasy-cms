@@ -35,27 +35,26 @@ class App
     protected static function dispatchRequest()
     {
         $request = self::getRequest();
-        var_dump($_SERVER);
-        exit();
+        $controller = Factory::get('Controller\\'. $request->getControllerName(). 'Controller');
+        $action = $request->getActionName();
+        if (is_callable([$controller, $action])) {
+            call_user_func([$controller, $action]);
+        } else {
+            echo '404';
+            // todo 404
+        }
     }
 
+    /**
+     * @return \Model\Http\Request
+     */
     public static function getRequest()
     {
-        $request = Registry::get('http_request_instance');
-        if ($request === null) {
-            $request = new \Model\Http\Request();
-            Registry::set('http_request_instance', $request);
-        }
-        return $request;
+        return Factory::get(\Model\Http\Request::class);
     }
 
     public static function getResponse()
     {
-        $response = Registry::get('http_response_instance');
-        if ($response === null) {
-            $response = new \Model\Http\Response();
-            Registry::set('http_response_instance', $response);
-        }
-        return $response;
+        return Factory::get(\Model\Http\Response::class);
     }
 }

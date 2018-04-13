@@ -13,4 +13,29 @@ class Factory
         $path = APP_DIR. DIRECTORY_SEPARATOR. $class. '.php';
         @include $path;
     }
+
+    public static function get($class, $args=null)
+    {
+        if (Registry::has($class)) {
+            return Registry::get(md5($class));
+        }
+        $instance = self::_create($class, $args);
+        Registry::set(md5($class), $instance);
+        return $instance;
+    }
+
+    public static function create($class, $args=null)
+    {
+        return self::_create($class, $args);
+    }
+
+    protected static function _create($class, $args=null)
+    {
+        if ($args === null) {
+            $instance = new $class;
+        } else {
+            $instance = new $class(... $args);
+        }
+        return $instance;
+    }
 }

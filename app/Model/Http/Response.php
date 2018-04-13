@@ -11,5 +11,8 @@ namespace Model\Http;
 
 class Response
 {
-
+    public function __construct()
+    {
+        
+    }
 }

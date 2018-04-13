@@ -34,4 +34,9 @@ class Registry
             unset(self::$data[$key]);
         }
     }
+
+    public static function has($key)
+    {
+        return isset(self::$data[$key]);
+    }
 }
