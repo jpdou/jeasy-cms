@@ -10,22 +10,52 @@ class App
 {
     const CONFIG_TYPE_DATABASE = 'database';
 
-    protected $_config;
+    protected static $_config;
 
-    public function getConfig($type)
+    public static function getConfig($type)
     {
-        return isset($this->_config[$type]) ? $this->_config[$type] : [];
+        return isset(self::$_config[$type]) ? self::$_config[$type] : [];
     }
 
-    protected function initConfig()
+    protected static function initConfig()
     {
-        if ($this->_config === null) {
-            $this->_config = require 'config.php';
+        if (self::$_config === null) {
+            self::$_config = require 'config.php';
         }
     }
 
-    public function run()
+    public static function run()
     {
-        $this->initConfig();
+        self::initConfig();
+
+        self::dispatchRequest();
+
+    }
+
+    protected static function dispatchRequest()
+    {
+        $request = self::getRequest();
+        var_dump($_SERVER);
+        exit();
+    }
+
+    public static function getRequest()
+    {
+        $request = Registry::get('http_request_instance');
+        if ($request === null) {
+            $request = new \Model\Http\Request();
+            Registry::set('http_request_instance', $request);
+        }
+        return $request;
+    }
+
+    public static function getResponse()
+    {
+        $response = Registry::get('http_response_instance');
+        if ($response === null) {
+            $response = new \Model\Http\Response();
+            Registry::set('http_response_instance', $response);
+        }
+        return $response;
     }
 }

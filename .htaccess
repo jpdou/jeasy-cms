@@ -1,0 +1,78 @@
+## Default index file
+
+    DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+
+############################################
+## Enable rewrites
+
+    Options +FollowSymLinks
+    RewriteEngine on
+
+############################################
+## You can put here your magento root folder
+## path relative to web root
+
+    #RewriteBase /magento/
+
+############################################
+## Workaround for HTTP authorization
+## in CGI environment
+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+############################################
+## TRACE and TRACK HTTP methods disabled to prevent XSS attacks
+
+    RewriteCond %{REQUEST_METHOD} ^TRAC[EK]
+    RewriteRule .* - [L,R=405]
+
+############################################
+## Never rewrite for existing files, directories and links
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+############################################
+## Rewrite everything else to index.php
+
+    RewriteRule .* index.php [L]
+
+</IfModule>
+
+
+<IfModule mod_expires.c>
+
+############################################
+## Add default Expires header
+## http://developer.yahoo.com/performance/rules.html#expires
+
+    ExpiresDefault "access plus 1 year"
+    ExpiresByType text/html A0
+    ExpiresByType text/plain A0
+
+</IfModule>
+
+# For 404s and 403s that aren't handled by the application, show plain 404 response
+ErrorDocument 404 /errors/404.php
+ErrorDocument 403 /errors/404.php
+
+###########################################
+## Deny access  to cron.php
+    <Files cron.php>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+
+<IfModule mod_headers.c>
+    ############################################
+    ## Prevent clickjacking
+    Header set X-Frame-Options SAMEORIGIN
+</IfModule>
