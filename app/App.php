@@ -43,6 +43,8 @@ class App
             echo '404';
             // todo 404
         }
+        $response = self::getResponse();
+        $response->send();
     }
 
     /**
@@ -53,6 +55,9 @@ class App
         return Factory::get(\Model\Http\Request::class);
     }
 
+    /**
+     * @return \Model\Http\Response
+     */
     public static function getResponse()
     {
         return Factory::get(\Model\Http\Response::class);

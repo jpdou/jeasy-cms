@@ -11,8 +11,19 @@ namespace Model\Http;
 
 class Response
 {
+    protected $content='';
     public function __construct()
     {
         
+    }
+
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    public function send()
+    {
+        echo $this->content;
     }
 }

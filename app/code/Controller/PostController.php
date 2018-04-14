@@ -13,6 +13,6 @@ class PostController extends AbstractController
 {
     public function Test()
     {
-        echo 'Test';
+        $this->renderPage();
     }
 }

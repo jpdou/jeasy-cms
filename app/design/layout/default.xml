@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page>
+    <block name="head" template="default/head.php"/>
+    <block name="body">
+        <block name="header"/>
+        <block name="main-content">
+            <block name="content"/>
+        </block>
+        <block name="footer"/>
+    </block>
+</page>

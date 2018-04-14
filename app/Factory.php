@@ -10,13 +10,13 @@ class Factory
 {
     public static function autoload($class)
     {
-        $path = APP_DIR. DIRECTORY_SEPARATOR. $class. '.php';
+        $path = APP_DIR. DIRECTORY_SEPARATOR. 'code'. DIRECTORY_SEPARATOR. $class. '.php';
         @include $path;
     }
 
     public static function get($class, $args=null)
     {
-        if (Registry::has($class)) {
+        if (Registry::has(md5($class))) {
             return Registry::get(md5($class));
         }
         $instance = self::_create($class, $args);
@@ -34,7 +34,7 @@ class Factory
         if ($args === null) {
             $instance = new $class;
         } else {
-            $instance = new $class(... $args);
+            $instance = new $class($args);
         }
         return $instance;
     }

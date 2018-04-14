@@ -3,7 +3,6 @@
 define('BASE_DIR', __DIR__);
 define('APP_DIR', BASE_DIR. DIRECTORY_SEPARATOR. 'app');
 
-
 set_include_path(get_include_path(). PATH_SEPARATOR. APP_DIR);
 
 
