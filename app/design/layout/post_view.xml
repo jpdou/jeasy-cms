@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page>
+    <block name="content" class="View\Post\View" template="post/view.php"/>
+</page>

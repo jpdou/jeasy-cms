@@ -9,13 +9,28 @@
 namespace Controller;
 
 use Model\Layout;
+use Model\Http\Request;
 
 class AbstractController
 {
+    /**
+     * @return Layout
+     */
+    protected function getLayout()
+    {
+        return \Factory::get(Layout::class);
+    }
+
     protected function renderPage()
     {
-        /** @var Layout $layout */
-        $layout = \Factory::get(Layout::class);
-        $layout->render();
+        $this->getLayout()->render();
+    }
+
+    /**
+     * @return Request
+     */
+    protected function getRequest()
+    {
+        return \Factory::get(Request::class);
     }
 }

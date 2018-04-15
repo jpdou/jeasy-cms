@@ -11,12 +11,6 @@
     RewriteEngine on
 
 ############################################
-## You can put here your magento root folder
-## path relative to web root
-
-    #RewriteBase /magento/
-
-############################################
 ## Workaround for HTTP authorization
 ## in CGI environment
 

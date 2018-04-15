@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: jp.dou
+ * Date: 2018/4/13
+ * Time: 21:51
+ */
+return [
+    'database' => [
+        'driver' => 'Pdo_Mysql',
+        'database' => '',
+        'username' => '',
+        'password' => '',
+        'hostname' => 'localhost',
+        'port'     => 3306,
+        'charset'  => 'utf8',
+    ],
+];

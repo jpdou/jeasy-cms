@@ -105,4 +105,20 @@ class Layout extends AbstractModel
         }
         return null;
     }
+
+    /**
+     * @param string $name
+     * @param $value
+     * @return Layout
+     */
+    public function setPageData($name, $value)
+    {
+        \Registry::update('page_'. $name, $value);
+        return $this;
+    }
+
+    public function getPageData($name)
+    {
+        return \Registry::get('page_'. $name);
+    }
 }

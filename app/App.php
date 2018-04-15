@@ -9,6 +9,7 @@
 class App
 {
     const CONFIG_TYPE_DATABASE = 'database';
+    const CONFIG_TYPE_APP = 'app';
 
     protected static $_config;
 
@@ -22,6 +23,11 @@ class App
         if (self::$_config === null) {
             self::$_config = require 'config.php';
         }
+    }
+
+    public static function getBaseUrl()
+    {
+        return self::getConfig(self::CONFIG_TYPE_APP)['base_url'];
     }
 
     public static function run()

@@ -3,8 +3,9 @@
     <block name="head" template="default/head.php"/>
     <block name="body">
         <block name="header"/>
-        <block name="main-content">
+        <block name="content-wrapper">
             <block name="content"/>
+            <block name="sidebar"/>
         </block>
         <block name="footer"/>
     </block>
